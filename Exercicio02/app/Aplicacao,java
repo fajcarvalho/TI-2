@@ -1,0 +1,69 @@
+package Exercicio02.app;
+
+
+import java.util.List;
+import java.util.Scanner;
+
+import dao.UsuarioDAO;
+import model.Usuario;
+
+public class Aplicacao {
+    
+    public static void main(String[] args) throws Exception {
+        
+        Scanner scanner = new Scanner(System.in);
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        int opcao = 0;
+        
+        while(opcao != 5) {
+            System.out.println("\n\n==== MENU DE OPÇÕES ====");
+            System.out.println("1) Inserir");
+            System.out.println("2) Listar");
+            System.out.println("3) Atualizar");
+            System.out.println("4) Excluir");
+            System.out.println("5) Sair");
+            System.out.print("Escolha uma opção: ");
+            opcao = scanner.nextInt();
+            
+            switch(opcao) {
+                case 1:
+                    System.out.println("Inserindo um novo usuário...");
+                    Usuario usuario = new Usuario(11, "pablo", "pablo",'M');
+                    if(usuarioDAO.insert(usuario)) {
+                        System.out.println("Usuário inserido com sucesso: " + usuario.toString());
+                    }
+                    break;
+                case 2:
+                    System.out.println("Listando usuários...");
+                    List<Usuario> usuarios = usuarioDAO.getOrderByCodigo(); // Mudar conforme necessário
+                    for (Usuario u : usuarios) {
+                        System.out.println(u.toString());
+                    }
+                    break;
+                case 3:
+                    System.out.println("Atualizando usuário...");
+                    // Você deve adicionar lógica para selecionar qual usuário atualizar
+                    Usuario usuarioToUpdate = new Usuario(11, "pabloAtualizado", "senhaNova", 'M');
+                    if(usuarioDAO.update(usuarioToUpdate)) {
+                        System.out.println("Usuário atualizado com sucesso: " + usuarioToUpdate.toString());
+                    }
+                    break;
+                case 4:
+                    System.out.println("Excluindo usuário...");
+                    // Você deve adicionar lógica para selecionar qual usuário excluir
+                    int codigoParaDeletar = 11; // Exemplo de código
+                    if(usuarioDAO.delete(codigoParaDeletar)) {
+                        System.out.println("Usuário excluído com sucesso.");
+                    }
+                    break;
+                case 5:
+                    System.out.println("Saindo...");
+                    break;
+                default:
+                    System.out.println("Opção inválida! Por favor, escolha uma opção entre 1 e 5.");
+            }
+        }
+        
+        scanner.close();
+    }
+}
