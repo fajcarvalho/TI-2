@@ -1,0 +1,51 @@
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<title>Controle de Produtos</title>
+<script type="text/javascript">
+    function confirmarDeleteProduto(id, descricao, preco, quantidade) {
+        if (confirm('Confirmar a exclusão do produto [' + descricao + '] (ID ' + id + ') com preço R$ ' + preco + ' e quantidade ' + quantidade + '?')) {
+            location.href = '/produto/delete/' + id;
+        }
+    }
+    function onLoad() {
+        if(document.getElementById("msg").value != ""){
+            alert(document.getElementById("msg").value);
+        }
+    }
+</script>
+</head>
+<body onload="onLoad()">
+    <h1>Controle de Produtos</h1>
+    <input type="hidden" id="msg" name="msg" value="">
+    <div>
+        <form action="/produto/add" method="post">
+            <label for="descricao">Descrição:</label>
+            <input type="text" id="descricao" name="descricao"><br>
+            <label for="preco">Preço:</label>
+            <input type="text" id="preco" name="preco"><br>
+            <label for="quantidade">Quantidade:</label>
+            <input type="number" id="quantidade" name="quantidade"><br>
+            <label for="datafabricacao">Data de Fabricação:</label>
+            <input type="datetime-local" id="datafabricacao" name="datafabricacao"><br>
+            <label for="datavalidade">Data de Validade:</label>
+            <input type="date" id="datavalidade" name="datavalidade"><br>
+            <input type="submit" value="Adicionar Produto">
+        </form>
+    </div>
+    <!-- O lugar para listar os produtos será preenchido dinamicamente pelo Spark -->
+    <div id="lista-produtos">
+        <!-- Os produtos serão listados aqui -->
+    </div>
+<style>
+    * { box-sizing: border-box; }
+    body { background-color: white; }
+    .input--main__style { background-color: #00FF00; }
+    .input--button { font-weight: bold; font-family: Arial; font-size: medium; border-color: transparent; display: block; margin: 0px auto; margin-bottom: 10px; color: white; }
+    .input--register { display: inline; }
+    input { display: block; border-radius: 7px; padding: 10px; border-style: solid; border-color: lightgray; color: black; padding: 10px; margin-bottom: 10px; }
+    form p { text-align: initial; display: inline; margin-left: 15px; }
+    .p--nomargin { margin-left: 0px; margin-right: 10px; }
+</style>
+</body>
+</html>
